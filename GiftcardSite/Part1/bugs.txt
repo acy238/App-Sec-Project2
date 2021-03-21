@@ -1,4 +1,4 @@
-The cross site scripting attack test case takes the form of a supplied URL (within "xss.txt") and exploits the vulnerable URL parameter 'director':
+The cross site scripting attack test case takes the form of a supplied URL (within "xss.txt") and exploits the vulnerable URL parameter "director":
 
 127.0.0.1:8000/gift?director=<script>alert("Hello”)</script>
 
