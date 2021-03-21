@@ -1,1 +1,7 @@
+The cross site scripting attack test case takes the form of a supplied URL (within "xss.txt") and exploits the vulnerable URL parameter 'director':
 
+127.0.0.1:8000/gift?director=<script>alert("Hello”)</script>
+
+Within the template titled "gift.html" - we noticed that the URL parameter, "director", is vulnerable.
+The reason behind this vulnerability is because auto-escaping has been turned off for the URL parameter "director" with the "safe" filter in gift.html.
+This vulnerability can be found in line 60 of "gift.html" and the vulnerability starts with: <p>Endorsed by {{director|safe}}!</p>
