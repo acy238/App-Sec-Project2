@@ -148,7 +148,7 @@ def gift_card_view(request, prod_num=0):
         context['user'] = user_account
         num_cards = len(Card.objects.filter(user=user_account))
         card_file_path = f"/tmp/addedcard_{user_account.id}_{num_cards + 1}.gftcrd'"
-        extras.write_card_data(card_file_path)
+        extras.write_card_data(card_file_path, prod, amount, request.user)
         prod = Product.objects.get(product_id=prod_num)
         card_file = open(card_file_path, 'rb')
         card = Card(data=card_file.read(), product=prod, amount=request.POST.get('amount', prod.recommended_price), fp=card_file_path, user=user_account)
