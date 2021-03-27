@@ -153,7 +153,7 @@ def gift_card_view(request, prod_num=0):
         extras.write_card_data(card_file_path, prod, amount, request.user)
 #         prod = Product.objects.get(product_id=prod_num)
         card_file = open(card_file_path, 'rb')
-        card = Card(data=card_file.read(), product=prod, amount, fp=card_file_path, user=user_account)
+        card = Card(data=card_file.read(), product=prod, amount=request.POST.get('amount', prod.recommended_price), fp=card_file_path, user=user_account)
         card.save()
         card_file.close()
         return render(request, f"gift.html", context)
