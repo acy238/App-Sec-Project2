@@ -74,4 +74,4 @@ print(random.randint(0, 2**length-1))
 ---
 
 If the hashed password (18821d89de11ab18488fdc0a01f1ddf4d290e198b0f80cd4974fc031dc2615a3) is saved to a file called: toBrute.txt
-Then, from the commandline, attackers can run: ./john --format=Raw-SHA256 --salts=30930 toBrute.txt
+Then, to decrypt from the commandline, attackers can run: ./john --format=Raw-SHA256 --salts=30930 toBrute.txt
