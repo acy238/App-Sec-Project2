@@ -38,6 +38,7 @@ class TestResponses(TestCase):
         self.assertEqual(res.status_code, 302)
         
     #Testing for SQL injection in uploaded giftcard to retrieve admin user's salted password, related to both attack number 3 and number 4
+    #Because if the salted/hashed password is not displayed/known, then adversary cannot brute force - covered attack number 4
     def test_a3(self):
         self.client.post("/login/", {"uname":"john", "pword":"john"})
         data = {}
