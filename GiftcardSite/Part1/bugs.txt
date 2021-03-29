@@ -75,3 +75,5 @@ print(random.randint(0, 2**length-1))
 
 If the salt, :, and hashed password (30930:18821d89de11ab18488fdc0a01f1ddf4d290e198b0f80cd4974fc031dc2615a3) are saved to a file called: toBrute.txt
 Then, to decrypt from the commandline, attackers can run: ./john --format=Raw-SHA256 --salts=1 toBrute.txt
+Because all users' passwords share the same salt value of 30930
+Furthermore, we can see in our sqlite3 database that all users' passwords begin the same (with the same salt value): 000000000000000000000000000078d2$
