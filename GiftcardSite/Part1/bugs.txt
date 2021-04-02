@@ -76,7 +76,7 @@ Example: with the salted password hash of the user: "john" and password: "john"
 With the test file from (3) -> we can display the salted password hash of john, and that is: c89e221a965a33f7b764224644d5e9c6f0526a42bf8e2efc48fc127f69ab01a1
 If the salted password hash (i.e., c89e221a965a33f7b764224644d5e9c6f0526a42bf8e2efc48fc127f69ab01a1) is saved to a file called: toBrute.txt
 And the adversary appends the salt: '000000000000000000000000000078d2', to the beginning (must be beginning and not the end) of every entry 
-This wordlist must also include 'john' in the wordlist/dictionary with the salt prepended (e.g., 000000000000000000000000000078d2john)
+  Note: this wordlist must also include 'john' in the wordlist/dictionary with the salt prepended (e.g., 000000000000000000000000000078d2john)
 And let's say that the adversary saves the wordlist/dictionary to a file titled: PopularPasswords.txt
 
 Then, to decrypt/brute-force from the commandline with john the ripper, attackers can run this command, directly below, from the command line: 
