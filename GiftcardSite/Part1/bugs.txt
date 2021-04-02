@@ -49,14 +49,14 @@ This utilizes the vulnerable parameter, signature, within the variable "card_que
 
 
 
-(4) This test relies on the results from test 3 above and the hashed password displayed: 18821d89de11ab18488fdc0a01f1ddf4d290e198b0f80cd4974fc031dc2615a3
+(4) This test relies on the results from test 3 above and the hashed password displayed:
 This test also relies on the same "RANDOM_SEED" value used for each registered user.
-  -> Because the generator’s random() function will continue to produce the same sequence when the compatible seeder is given the same seed.
-  -> And "RANDOM_SEED" with a value of "2RUHYAyJWdDdXOicZfnTRw==" is given to the random() function for every user registered.
+  -> Because the generator’s random() function will continue to produce the same sequence when the compatible seeder is given the same seed value.
+  -> And "RANDOM_SEED" with a value of "2RUHYAyJWdDdXOicZfnTRw==" is given to the random() function for every user registered, each and every time.
   -> This will produce the same sequence for all users because of the same seed.
-  -> Hence, all users passwords will be salted with the same value of 30930.
+  -> Hence, all users passwords will be salted with the same value of 30930; and in bytes '000000000000000000000000000078d2'
   
-This python script below allowed us to find the salt value, used with sha256(). 
+This python script below allowed us to find the salt value used with sha256(). 
 All the registered users on this website will have passwords salted with the value of 30930. We know this from this script below:
 ---
 import random
@@ -72,8 +72,15 @@ print(random.randint(0, 2**length-1))
 # printed: salt (in bytes) from above w/ hexlify = b'000000000000000000000000000078d2'
 # printed: salt (in base 10 form) is = 30930
 ---
+Example: with the salted password hash of the user: "john" and password: "john" 
+With the test file from (3) -> we can display the salted password hash of john, and that is: c89e221a965a33f7b764224644d5e9c6f0526a42bf8e2efc48fc127f69ab01a1
+If the salted password hash (i.e., c89e221a965a33f7b764224644d5e9c6f0526a42bf8e2efc48fc127f69ab01a1) is saved to a file called: toBrute.txt
+And the adversary appends the salt: '000000000000000000000000000078d2', to the beginning (must be beginning and not the end) of every entry 
+This wordlist must also include 'john' in the wordlist/dictionary with the salt prepended (e.g., 000000000000000000000000000078d2john)
+And let's say that the adversary saves the wordlist/dictionary to a file titled: PopularPasswords.txt
 
-If the salt, :, and hashed password (30930:18821d89de11ab18488fdc0a01f1ddf4d290e198b0f80cd4974fc031dc2615a3) are saved to a file called: toBrute.txt
-Then, to decrypt from the commandline, attackers can run: ./john --format=Raw-SHA256 --salts=1 toBrute.txt
-Because all users' passwords share the same salt value of 30930
-Furthermore, we can see in our sqlite3 database that all users' passwords begin the same (with the same salt value): 000000000000000000000000000078d2$
+Then, to decrypt/brute-force from the commandline with john the ripper, attackers can run this command, directly below, from the command line: 
+./john --wordlist=PopularPasswords.txt --salts=1 --format=Raw-SHA256 toBrute.txt
+
+Because all users' passwords share the same salt value of: 000000000000000000000000000078d2
+Moreover, we can see in our sqlite3 database that all users' passwords begin the same (with the same salt value followed by $): 000000000000000000000000000078d2$
