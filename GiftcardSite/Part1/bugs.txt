@@ -6,7 +6,7 @@ Within the template titled "gift.html" - we noticed that the URL parameter, "dir
 The reason behind this vulnerability is because auto-escaping has been turned off for the URL parameter "director" with the "safe" filter in gift.html.
 This vulnerability can be found in line 60 of the given "gift.html" and the vulnerability starts with: <p>Endorsed by {{director|safe}}!</p>
 
-
+Test (2) directly below.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ This URL link embeds javascript to the vulnerable url parameter for "director" a
 This URL link will "POST" data when the link is clicked on, sending "FormData" to the webserver. 
 This "FormData" includes a giftcard with the amount of 333 to the user john (unintended recipient);
 
-
+Test (3) directly below.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ The code (mixed with giftcard records data) below is found in the "salt.gftcrd" 
 This SQL code will "union" with the original SQL code at line 188 of the original "views.py" file given. 
 This utilizes the vulnerable parameter, signature, within the variable "card_query" - because: %s was wrapped with quotes at line 188 of "card_query"
 
-
+Test (4) directly below.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
