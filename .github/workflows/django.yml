@@ -26,13 +26,13 @@ jobs:
 #         python -m pip install --upgrade pip
 #         pip install -r requirements.txt
     - name: initialMakeMigrations
-      run: python manage.py makemigrations LegacySite
+      run: python GiftcardSite/manage.py makemigrations LegacySite
     - name: doubleCheck
-      run: python manage.py makemigrations
+      run: python GiftcardSite/manage.py makemigrations
     - name: tripleCheck
-      run: python manage.py migrate
+      run: python GiftcardSite/manage.py migrate
     - name: dbMake
-      run: sh import_dbs.sh
+      run: sh GiftcardSite/import_dbs.sh
     - name: Run Tests
       run: |
         python manage.py test
