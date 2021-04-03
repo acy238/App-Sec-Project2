@@ -16,3 +16,4 @@ print(random.randint(0, 2**length-1))
 
 # This greatly reduces the number of possibilities (search space) for the adversary because:
 # The adversary can append '000000000000000000000000000078d2' to the beginning of each word in the dictionary/wordlist and brute force from there.
+# Please refer to "bugs.txt" for the complete overview with details on test case 4.
