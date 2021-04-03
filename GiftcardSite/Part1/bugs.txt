@@ -84,3 +84,7 @@ Then, to decrypt/brute-force from the commandline with john the ripper, attacker
 
 Because all users' passwords share the same salt value of: 000000000000000000000000000078d2
 Moreover, we can see in our sqlite3 database that all users' passwords begin the same (with the same salt value followed by $): 000000000000000000000000000078d2$
+The attacker can append the exact same salt to every value in the text file and brute forced from there.
+By sharing the same salt for every users' password, this greatly reduces the possibilities (search space) until a correct string is reached/hashed.
+Hence, the salt value in users' password should vary between each user.
+Please refer to "JohnTheRipperResultsBruteForced.png" in Part1 folder for a screenshot of the brute forced results (sha256 password hash) with John The Ripper.
