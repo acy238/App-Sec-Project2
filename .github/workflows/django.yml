@@ -35,5 +35,7 @@ jobs:
       run: python GiftcardSite/manage.py migrate
     - name: dbMake
       run: sh GiftcardSite/import_dbs.sh
+    - name: preRun
+      run: cd GiftcardSite
     - name: Run Tests
-      run: python GiftcardSite/manage.py test
+      run: python manage.py test
