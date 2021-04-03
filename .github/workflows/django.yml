@@ -38,4 +38,4 @@ jobs:
     - name: preRun
       run: cd GiftcardSite
     - name: Run Tests
-      run: python manage.py test
+      run: python GiftcardSite/manage.py test
