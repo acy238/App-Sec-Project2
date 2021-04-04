@@ -1,9 +1,9 @@
 Within models.py under our LegacySite directory, we encrypted the "data" variable of our "Card" class model. We choose this encryption key because:
   There is a vulnerability within our card query on line 188 of views.py that starts with:
     card_query = Card.objects.raw('select id from LegacySite_card where data = \'%s\'' % signature)
-  Because the placeholder (%s) is quoted -> this should be unquoted to be protected. 
-  The placeholder is substituted for data's value because of the SQL code that is trying to filter/match the data column's value with the keyword: (where)
-  With all the values in the data column encrypted, it would be protected from SQL injections.
+  The placeholder is substituted in for data's value because of the SQL code (with the keyword: where) that is trying to filter/match 'data' column's value.
+      The placeholder (%s) for the 'data' column is quoted -> this should be unquoted to be protected. 
+  With all the values in the 'data' column encrypted, it would be protected from SQL injections.
   
 To fix these vulnerabilities for part1 and part2, we have:
   1. Unquoted the placeholder (%s) 
