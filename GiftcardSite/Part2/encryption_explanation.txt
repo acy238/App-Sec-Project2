@@ -4,3 +4,9 @@ Within models.py under our LegacySite directory, we encrypted the "data" variabl
   Because the placeholder (%s) is quoted -> this should be unquoted to be protected. 
   The placeholder is substituted for data's value because of the SQL code that is trying to filter/match the data column's value with the keyword: (where)
   With all the values in the data column encrypted, it would be protected from SQL injections.
+  
+To fix these vulnerabilities, we have:
+  1. Unquoted the placeholder (%s) 
+  2. Encrypted the "data" variable of our "Card" class model with django-cryptography
+  3. Removed the 'director' variable from views.py by commenting out code after: #director = request.GET.get('director', None)
+    Note: this was done for "buy_card_view" and "gift_card_view" in views.py (no other view used the 'director' variable).
