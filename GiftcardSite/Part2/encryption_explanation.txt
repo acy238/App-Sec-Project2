@@ -8,5 +8,6 @@ Within models.py under our LegacySite directory, we encrypted the "data" variabl
 To fix these vulnerabilities for part1 and part2, we have:
   1. Unquoted the placeholder (%s) 
   2. Encrypted the "data" variable of our "Card" class model with django-cryptography
-  3. Removed the 'director' variable from views.py by commenting out code after: #director = request.GET.get('director', None)
-    Note: this was done for "buy_card_view" and "gift_card_view" in views.py (no other view used the 'director' variable).
+  3. Removed the "director" variable from views.py by commenting out code after: #director = request.GET.get('director', None)
+    Note: this was done for "buy_card_view" and "gift_card_view" in views.py (no other view used the "director" variable).
+    Because: the "director" variable is marked with a safe tag in the templates -> hence, a prime vulnerability.
