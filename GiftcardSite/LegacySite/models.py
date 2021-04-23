@@ -39,7 +39,9 @@ class Product(models.Model):
 
 class Card(models.Model):
     id = models.AutoField(primary_key=True)
-    data = encrypt(models.BinaryField(unique=True))
+    import secrets
+    dbKey = secrets.token_hex(32)
+    data = encrypt(models.BinaryField(unique=True), key=dbKey)
 #     data = models.BinaryField(unique=True)
     product = models.ForeignKey('LegacySite.Product', on_delete=models.CASCADE, default=None)
     amount = models.IntegerField()
