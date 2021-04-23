@@ -11,3 +11,10 @@ To fix these vulnerabilities for part1 and part2, we have:
   3. Removed the "director" variable from views.py by commenting out code after: #director = request.GET.get('director', None)
     Note: this was done for "buy_card_view" and "gift_card_view" in views.py (no other view used the "director" variable).
     Because: the "director" variable is marked with a safe tag in the templates -> hence, a prime vulnerability.
+
+For key management, we do not use the "RANDOM_SEED" variable from settings.py. 
+So the "SEED" variable in LegacySite/extras.py will not be used, and line #14 in extras.py is commented out.
+Instead, we will seed random with a random number between 1 and 777 so that it is not a hard coded secret key and truly random each time.
+We have this code, starting at line #13 of LegacySite/extras.py to replace the original approach:
+    tempSeed = random.randrange(1,777,1)
+    random.seed(tempSeed)
